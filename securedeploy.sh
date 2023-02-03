@@ -1,0 +1,83 @@
+#!/bin/bash
+
+
+<<dcs: 
+Dallas=us-central
+Fremont=us-west
+Newark=us-east
+Atlanta=us-southeast
+UK=eu-west
+Frankfurt=eu-central
+Tokyo2=ap-northeast
+Singapore=ap-south
+Mumbai=ap-west
+Sydney=ap-southeast
+Toronto=ca=central
+dcs:
+
+#These Variables will almost always stay the same
+BYellow='\033[1;33m'
+NC='\033[0m'
+
+pub_key=$(cat $HOME/.ssh/id_rsa.pub)
+
+JSON="{
+    \"username\":\"${sudouser}\",
+    \"password\":\"${sudopass}\",
+    \"pubkey\":\"${pub_key}\",
+    \"disable_root\":\"${dis_root}\"
+    }"
+
+#Clear your screen before you do anything
+Clear
+
+#Set your CLI parameters
+
+    echo -e "${BYellow}What size plan should we deploy?: ${NC}"
+    linode-cli linodes types --text --delimiter "," | awk -F"," '{print "\033[32m"$1" \t " $2" \033[0m";}' | head -7 | tail -n+2
+    read plan
+    
+    echo -e  "${BYellow}Where do you want to deploy this Linode?: ${NC}" 
+    linode-cli regions ls --text --delimiter "," | awk -F"," '{print "\033[32m"$1" \t " $2" \033[0m";}' | tail -n+2
+    read region_id
+    
+    echo -e "${BYellow}What should we call it?: ${NC}"
+    read label
+    
+    echo -e "${BYellow}What tag should it have?: ${NC}"
+    read tag 
+    
+    echo -e "${BYellow}Set a Root Password: ${NC} (must be secure)"
+    read -s root_pass
+    echo
+    
+    echo -e "${BYellow}What will your limited username be?: ${NC}"
+    read sudouser
+    
+    echo -e "${BYellow}What should the limited user password be?: ${NC}"
+    read -s sudopass
+    echo 
+    
+    echo -e "${BYellow}Disable SSH for Root?: ${NC} (Yes/No)"
+    read dis_root
+
+JSON="{
+    \"username\":\"${sudouser}\",
+    \"password\":\"${sudopass}\",
+    \"pubkey\":\"${pub_key}\",
+    \"disable_root\":\"${dis_root}\"
+    }"
+
+#Use the CLI to deploy a secured Linode
+    linode-cli linodes create \
+        --type $plan \
+        --authorized_keys "$(cat $HOME/.ssh/id_rsa.pub))" \
+        --root_pass $root_pass \
+        --region  $region_id  \
+        --label $label \
+        --tags $tag \
+        --stackscript_id 692092  \
+        --stackscript_data "$JSON" \
+        --image "linode/debian11" \
+        --no-defaults
+
