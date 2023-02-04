@@ -41,6 +41,9 @@ Clear
     linode-cli regions ls --text --delimiter "," | awk -F"," '{print "\033[32m"$1" \t " $2" \033[0m";}' | tail -n+2
     read region_id
     
+    echo -e "${BYellow}Disable SSH for Root?: ${NC} (linode/debian11 or linode/ubunu22.04"
+    read image_id
+    
     echo -e "${BYellow}What should we call it?: ${NC}"
     read label
     
@@ -71,6 +74,7 @@ JSON="{
 #Use the CLI to deploy a secured Linode
     linode-cli linodes create \
         --type $plan \
+        --image $image_id \
         --authorized_keys "$(cat $HOME/.ssh/id_rsa.pub))" \
         --root_pass $root_pass \
         --region  $region_id  \
