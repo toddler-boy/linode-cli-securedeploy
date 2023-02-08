@@ -28,7 +28,7 @@ Clear
     linode-cli regions ls --text --delimiter "," | awk -F"," '{print "\033[32m"$1" \t " $2" \033[0m";}' | tail -n+2
     read region_id
     
-    echo -e "${BYellow}Which Distro do you want to use?: ${NC} (linode/debian10 | linode/debian11 | linode/ubuntu20.04"
+    echo -e "${BYellow}Which Distro do you want to use?: ${NC} (linode/debian10 | linode/debian11 | linode/ubuntu20.04)"
     read image
     
     echo -e "${BYellow}What should we call it?: ${NC}"
