@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# simple prompt-based script to help deploy via CLI
 
 #These Variables will almost always stay the same
 BYellow='\033[1;33m'
