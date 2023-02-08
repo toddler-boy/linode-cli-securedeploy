@@ -71,4 +71,3 @@ JSON="{
         --stackscript_data "$JSON" \
         --image "linode/debian11" \
         --no-defaults
-
