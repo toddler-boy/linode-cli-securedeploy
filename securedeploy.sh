@@ -1,20 +1,6 @@
 #!/bin/bash
 
 
-<<dcs: 
-Dallas=us-central
-Fremont=us-west
-Newark=us-east
-Atlanta=us-southeast
-UK=eu-west
-Frankfurt=eu-central
-Tokyo2=ap-northeast
-Singapore=ap-south
-Mumbai=ap-west
-Sydney=ap-southeast
-Toronto=ca=central
-dcs:
-
 #These Variables will almost always stay the same
 BYellow='\033[1;33m'
 NC='\033[0m'
@@ -41,7 +27,7 @@ Clear
     linode-cli regions ls --text --delimiter "," | awk -F"," '{print "\033[32m"$1" \t " $2" \033[0m";}' | tail -n+2
     read region_id
     
-    echo -e "${BYellow}Which Distro do you want to use?: ${NC} (linode/debian11 or linode/ubuntu22.04"
+    echo -e "${BYellow}Which Distro do you want to use?: ${NC} (linode/debian11 or linode/ubuntu20.04"
     read image_id
     
     echo -e "${BYellow}What should we call it?: ${NC}"
