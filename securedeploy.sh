@@ -27,10 +27,14 @@ Clear
     echo -e  "${BYellow}Where do you want to deploy this Linode?: ${NC}" 
     linode-cli regions ls --text --delimiter "," | awk -F"," '{print "\033[32m"$1" \t " $2" \033[0m";}' | tail -n+2
     read region_id
+<<<<<<< HEAD
     
     echo -e "${BYellow}Which Distro do you want to use?: ${NC} (linode/debian11 or linode/ubuntu20.04"
     read image_id
     
+=======
+       
+>>>>>>> 270c9649e994c405ca7d06887f4bd4d4b5986071
     echo -e "${BYellow}What should we call it?: ${NC}"
     read label
     
