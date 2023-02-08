@@ -28,8 +28,8 @@ Clear
     linode-cli regions ls --text --delimiter "," | awk -F"," '{print "\033[32m"$1" \t " $2" \033[0m";}' | tail -n+2
     read region_id
     
-    echo -e "${BYellow}Which Distro do you want to use?: ${NC} (linode/debian11 or linode/ubuntu20.04"
-    read image_id
+    echo -e "${BYellow}Which Distro do you want to use?: ${NC} (linode/debian10 | linode/debian11 | linode/ubuntu20.04"
+    read image
     
     echo -e "${BYellow}What should we call it?: ${NC}"
     read label
@@ -60,7 +60,7 @@ JSON="{
 
 #Use the CLI to deploy a secured Linode
     linode-cli linodes create \
-        --image $image_id \
+        --image $image \
         --type $plan \
         --authorized_keys "$(cat $HOME/.ssh/id_rsa.pub))" \
         --root_pass $root_pass \
@@ -69,5 +69,4 @@ JSON="{
         --tags $tag \
         --stackscript_id 692092  \
         --stackscript_data "$JSON" \
-        --image "linode/debian11" \
         --no-defaults
