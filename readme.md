@@ -7,7 +7,7 @@ It will let you do the following via some fairly user-friendly text prompts:
 - Pick deployment specs:
     - Linode Plan Size
     - Deployment Region
-    - Distribution (**The Marketplace App currently only supports 3 distros)
+    - Distribution (**The Marketplace App currently only supports 3 distros**)
     - Label
     - Tags
 - Harden SSH access by:
