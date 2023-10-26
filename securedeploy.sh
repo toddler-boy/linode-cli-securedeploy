@@ -20,12 +20,12 @@ Clear
 
 #Set your CLI parameters
 
-    echo -e "${BYellow}What size plan should we deploy?: ${NC}"
-    linode-cli linodes types --text --delimiter "," | awk -F"," '{print "\033[32m"$1" \t " $2" \033[0m";}' | head -7 | tail -n+2
+    echo -e "${BYellow}What size plan should we deploy? (Enter ID): ${NC}"
+    linode-cli linodes types --format id,label
     read plan
     
-    echo -e  "${BYellow}Where do you want to deploy this Linode?: ${NC}" 
-    linode-cli regions ls --text --delimiter "," | awk -F"," '{print "\033[32m"$1" \t " $2" \033[0m";}' | tail -n+2
+    echo -e  "${BYellow}Where do you want to deploy this Linode (Enter ID)?: ${NC}" 
+    linode-cli regions ls --format id,label
     read region_id
     
     echo -e "${BYellow}Which Distro do you want to use?: ${NC} (linode/debian10 | linode/debian11 | linode/ubuntu20.04)"
